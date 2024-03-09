@@ -1,13 +1,26 @@
-// console.log("first")
+const express = require("express")
+const app = express()
 
-var http = require("http")
+app.set("view engine","ejs ")
 
-var server = http.createServer((req, res) => {
-    console.log(req.url)
-
-    res.end()
+app.use("/products/:id", (req, res)=> {
+    // res.send(req.params)
+    res.render("products" + req.params.id)
+})
+app.use("/products", (req, res)=> {
+    res.render("products" + req.params.id)
 })
 
-server.listen(3000, ()=> {
-    console.log("nodejs server at port 3000")
+app.use("/", function(req, res) {
+    res.render("index")
+})
+
+app.listen(3000, ()=> {
+    console.log("listening on port 3000")
+})
+
+
+
+app.listen(3000, ()=> {
+    console.log("listening on port 3000")
 })
